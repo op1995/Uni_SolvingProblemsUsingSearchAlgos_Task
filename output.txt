@@ -1,4 +1,4 @@
-8R-11D-7L-8U
-Num: 21
-Cost: 20
-0.0020926 seconds
+7L-4D-8R-4U-8U
+Num: 288
+Cost: 25
+0.033583 seconds

@@ -8,10 +8,12 @@ public class Ex1 {
 	public static void main(String[] args) {
 		try {
 			fileParams _fileParams = new fileParams();
-			Node source = new Node(_fileParams.board_initial, _fileParams.blank_counter, _fileParams.blank_location);
+			Node source = new Node(_fileParams.board_initial, _fileParams.blank_counter, _fileParams.blank1_location, _fileParams.blank2_location);
+			Node goal = new Node(_fileParams.board_goal, _fileParams.blank_counter, _fileParams.blank1_location, _fileParams.blank2_location);
+			
 			switch(_fileParams.Algo) {
 			case "BFS":
-				BFS.runBFS(_fileParams, source);
+				BFS.runBFS(_fileParams, source, goal);
 				break;
 			
 			case "DFID":

@@ -11,7 +11,8 @@ public class fileParams {
 	int[][] board_initial;
 	int[][] board_goal;
 	int blank_counter;
-	int blank_location;
+	int blank1_location = -1;
+	int blank2_location = -1;
 
 	fileParams() throws FileNotFoundException{
 		File inputFile = new File("input.txt");
@@ -34,7 +35,7 @@ public class fileParams {
 			board_initial_strings[i] = myReader.nextLine();
 		}
 
-		read_board_init_or_goal(this.board_initial, board_initial_strings, true);
+		read_board_init_or_goal(this.board_initial, board_initial_strings, 0);
 
 		String goal_state_line = myReader.nextLine();
 		if (!goal_state_line.contains("Goal state")){
@@ -47,7 +48,7 @@ public class fileParams {
 			board_goal_strings[i] = myReader.nextLine();
 		}
 
-		read_board_init_or_goal(this.board_goal, board_goal_strings, false);
+		read_board_init_or_goal(this.board_goal, board_goal_strings, 2);
 
 		myReader.close();
 
@@ -57,17 +58,26 @@ public class fileParams {
 
 	}
 
-	//gets an int array representing the board, at initial or goal state, and an array of strings
+	//gets an initialized but empty int array representing the board, at initial or goal state, and an array of strings
 	//containing value of each element on the board, in the form of strings, each representing a row
 	//parses the strings in to the array
-	void read_board_init_or_goal(int[][] board, String[] strings, boolean init) {
+	//the init value is so when intializing the goal board, blank counter will not go up
+	void read_board_init_or_goal(int[][] board, String[] strings, int init) {
 		for (int i = 0; i < board.length; i++) {
 			String[] temp = strings[i].split(",");
 			for (int j = 0; j < board[0].length; j++) {
 				if(temp[j].contentEquals("_")) {
 					board[i][j] = -1;
-					if (init) this.blank_counter += 1;
-					blank_location = i*number_of_columns + j;
+					if (0==init) {
+						this.blank_counter += 1;
+						blank1_location = i*number_of_columns + j;
+						init++;
+					}
+					else if(1==init) {
+						this.blank_counter += 1;
+						blank2_location = i*number_of_columns + j;
+					}
+					
 				}
 				else {
 					board[i][j] = Integer.parseInt(temp[j]);

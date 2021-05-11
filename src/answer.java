@@ -38,7 +38,16 @@ public class answer {
 				boolean first = true;
 				String new_addition_to_route = "";
 				while(temp.pred!=null) {
-					new_addition_to_route = temp.number_moved_to_get_to_me + moveIntToOutputForamt(temp.move_made_to_get_to_me);
+					
+					if(temp.moved_2_to_get_to_me) {
+						new_addition_to_route = temp.numbers_moved_to_get_to_me[0] + "&" + temp.numbers_moved_to_get_to_me[1] + moveIntToOutputForamt(temp.move_made_to_get_to_me);
+						cost+=7;
+					}
+					
+					else {
+						new_addition_to_route = temp.numbers_moved_to_get_to_me[0] + moveIntToOutputForamt(temp.move_made_to_get_to_me);
+						cost+=5;
+					}
 					
 					if(first) {
 						route = new_addition_to_route;
@@ -48,7 +57,6 @@ public class answer {
 						route = new_addition_to_route + "-" + route;
 					}
 					temp = temp.pred;
-					cost+=5; //TODO - don't forget to change this for when moving 2 blocks together
 				}
 			}
 			
