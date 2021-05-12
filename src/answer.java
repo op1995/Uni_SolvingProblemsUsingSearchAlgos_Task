@@ -102,8 +102,11 @@ public class answer {
 
 
 	static double getTimeInSeconds(long start, long end) {
-
-		long elapsedTime = end - start;   
+		long elapsedTime = end - start;
+		
+		long elapsedTimeInSecond_long = TimeUnit.SECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS);
+		
+		   
 		
         double elapsedTimeInSecond = (double) elapsedTime / 1_000_000_000;
 

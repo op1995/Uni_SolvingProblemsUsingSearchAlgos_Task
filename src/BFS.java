@@ -15,8 +15,8 @@ public class BFS {
 		
 		Queue<Node> line = new LinkedList<Node>();
 		line.add(source);
-		Hashtable<Node, Boolean> open_list = new Hashtable<Node, Boolean>();
-		open_list.put(source, true);
+//		Hashtable<Node, Boolean> open_list = new Hashtable<Node, Boolean>();
+//		open_list.put(source, true);
 		Hashtable<Node, Boolean> closed_list = new Hashtable<Node, Boolean>();
 //		closed_list.put(source, true);
 		
@@ -28,6 +28,10 @@ public class BFS {
 		int possible_moves = source.two_blanks_exist? 12 : 4;
 		
 		while(!line.isEmpty()) {
+			if (_fileParams.openList) {
+				System.out.println("Open-list: \n");
+				line.stream().forEach(System.out::println);
+			}
 			Node popped_node =line.remove();
 			closed_list.put(popped_node, true);
 			int higher_or_more_to_the_left_node = 1;
@@ -139,7 +143,7 @@ public class BFS {
 				//check if move is optional, and if not continue
 
 				if (!popped_node.check_move_allowed(mde, how_many_to_check_or_move, which_blank_to_check_or_move)) {
-					System.out.println("continuing");
+//					System.out.println("continuing");
 					continue;
 				}
 
@@ -147,11 +151,11 @@ public class BFS {
 				temp = new Node(popped_node);
 				nodes_created++;
 				temp.pred = popped_node;
-				System.out.println("Direction: " + mde + " blank to move: " + which_blank_to_check_or_move + "\n");
-				String before = temp.toString();
+//				System.out.println("Direction: " + mde + " blank to move: " + which_blank_to_check_or_move + "\n");
+//				String before = temp.toString();
 				temp.move(mde, which_blank_to_check_or_move, how_many_to_check_or_move);
-				System.out.println("before - \n" + before);
-				System.out.println("after - \n" + temp.toString());
+//				System.out.println("before - \n" + before);
+//				System.out.println("after - \n" + temp.toString());
 				
 //				Node temp2 = new Node(temp);
 //				route = "";

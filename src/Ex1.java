@@ -16,13 +16,15 @@ public class Ex1 {
 				BFS.runBFS(_fileParams, source, goal);
 				break;
 			
+			case "A*":
+				Astar.runAstar(_fileParams, source, goal);
+				break;
+				
 			case "DFID":
 				
 				break;
 			
-			case "A*":
-				
-				break;
+			
 			
 			case "IDA*":
 

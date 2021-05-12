@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 //import java.util.Iterator;
 
-public class Node {
+public class Node implements Comparable<Node> {
 //	int[] location_of_each_number;
 	int location_of_blank1 = -1;
 	int location_of_blank2 = -1;
@@ -16,6 +16,9 @@ public class Node {
 	boolean moved_2_to_get_to_me = false;
 	
 	public Node pred = null;
+	
+	private int cost_to_me = 0;
+	int myManhattanDistance = -1;
 	
 	Node (int[][] board, int blankCounter, int blank1_location, int blank2_location){
 		this.board = board;
@@ -72,6 +75,9 @@ public class Node {
 		this.pred = copyMe.pred;
 		this.move_made_to_get_to_me = copyMe.move_made_to_get_to_me;
 		this.numbers_moved_to_get_to_me = copyMe.getNumbers_moved_to_get_to_me();
+		this.cost_to_me = copyMe.getCost_to_me();
+		this.myManhattanDistance = copyMe.myManhattanDistance;
+		this.moved_2_to_get_to_me = copyMe.moved_2_to_get_to_me;
 	}
 	
 	
@@ -87,6 +93,8 @@ public class Node {
 	//move 1 number
 	//move direction - 0,1,2,3 - left, up, right, down
 	public void move1(move_direction_enum direction, int blank_to_move) {
+		cost_to_me+=5;
+		
 		moved_2_to_get_to_me = false; //not sure needed, as it is false when initialized, but maybe neede because of copy constructor ot other reasons,
 									  //and very cheap 
 		
@@ -195,6 +203,7 @@ public class Node {
 	//move 2 numbers together
 	public void move2(move_direction_enum direction) {
 		moved_2_to_get_to_me = true;
+		cost_to_me+=7;
 		
 		int row_of_blank1 = location_of_blank1 / this.board[0].length;
 		int column_of_blank1 = location_of_blank1 % this.board[0].length;
@@ -340,7 +349,7 @@ public class Node {
 				int other_blank_row = other_blank_location / this.board[0].length;
 				int other_blank_column = other_blank_location % this.board[0].length;
 
-				if((blank_being_checked_row == other_blank_row) && (other_blank_column == blank_being_checked_column-1)) return false;
+				if((blank_being_checked_row == other_blank_row) && (other_blank_column == blank_being_checked_column+1)) return false;
 				
 			}
 			
@@ -362,7 +371,7 @@ public class Node {
 				int other_blank_row = other_blank_location / this.board[0].length;
 				int other_blank_column = other_blank_location % this.board[0].length;
 
-				if((blank_being_checked_row == other_blank_row+1) && (other_blank_column == blank_being_checked_column)) return false;
+				if((blank_being_checked_row == other_blank_row-1) && (other_blank_column == blank_being_checked_column)) return false;
 				
 			}
 			
@@ -383,7 +392,7 @@ public class Node {
 				int other_blank_row = other_blank_location / this.board[0].length;
 				int other_blank_column = other_blank_location % this.board[0].length;
 
-				if((blank_being_checked_row == other_blank_row) && (other_blank_column == blank_being_checked_column+1)) return false;
+				if((blank_being_checked_row == other_blank_row) && (other_blank_column == blank_being_checked_column-1)) return false;
 				
 			}
 			
@@ -404,7 +413,7 @@ public class Node {
 				int other_blank_row = other_blank_location / this.board[0].length;
 				int other_blank_column = other_blank_location % this.board[0].length;
 
-				if((blank_being_checked_row == other_blank_row-11) && (other_blank_column == blank_being_checked_column)) return false;
+				if((blank_being_checked_row == other_blank_row+1) && (other_blank_column == blank_being_checked_column)) return false;
 				
 			}
 			
@@ -514,6 +523,10 @@ public class Node {
 		//TODO - check this works as intended
 	}
 
+	public int getCost_to_me() {
+		return cost_to_me;
+	}
+	
 	@Override
 	public String toString() {
 		String return_value = "";
@@ -521,6 +534,14 @@ public class Node {
 			return_value = return_value + Arrays.toString(board[i]) + "\n";	
 		}
 		return return_value;
+	}
+
+	@Override
+	public int compareTo(Node other) {
+		
+		if (this.cost_to_me + this.myManhattanDistance > other.cost_to_me + other.myManhattanDistance) return 1;
+		else if(this.cost_to_me + this.myManhattanDistance < other.cost_to_me + other.myManhattanDistance) return -1;
+		else return 0;
 	}
 	
 }
