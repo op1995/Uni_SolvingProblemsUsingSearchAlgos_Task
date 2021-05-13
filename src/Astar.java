@@ -6,7 +6,7 @@ import java.util.Queue;
 public class Astar {
 
 	static void runAstar(fileParams _fileParams, Node source, Node goal) {
-		long start_time = System.nanoTime();
+		long start_time = System.currentTimeMillis();
 		boolean found_answer = false;
 		
 		source.myManhattanDistance = heuristic.generateManhattanDistance(source, goal);
@@ -64,8 +64,9 @@ public class Astar {
 			if(popped_node.equals(goal)) {
 
 				found_answer = true;
+				long end_time = System.currentTimeMillis();
 				
-				double elapsedTimeInSecond = answer.getTimeInSeconds(start_time, System.nanoTime());
+				double elapsedTimeInSecond = answer.getTimeInSeconds(start_time, end_time);
 				
 				answer.output_answer(popped_node, nodes_created, _fileParams.print_runtime, elapsedTimeInSecond, true);
 				open_list.clear();
