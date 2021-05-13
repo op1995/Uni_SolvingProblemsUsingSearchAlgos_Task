@@ -1,6 +1,8 @@
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 
@@ -8,8 +10,8 @@ public class BFS {
 
 
 	static void runBFS(fileParams _fileParams, Node source, Node goal) {
-		long start_time = System.nanoTime();
-		
+		long start_time = System.currentTimeMillis();
+		boolean found_answer = false;
 		
 //		Node goal = new Node(_fileParams.board_goal, _fileParams.blank_counter, _fileParams.blank_location);
 		
@@ -171,10 +173,12 @@ public class BFS {
 				if(!(line.contains(temp) || closed_list.containsKey(temp))) {
 //					closed_list.put(temp, true);
 					if(temp.equals(goal)) {
+						found_answer = true;
 						
-						double elapsedTimeInSecond = answer.getTimeInSeconds(start_time, System.nanoTime());
+						long end_time = System.currentTimeMillis();
+						double elapsedTimeInSecond = answer.getTimeInSeconds(start_time, end_time);
 						
-						answer.output_answer(temp, nodes_created, _fileParams.print_runtime, elapsedTimeInSecond);
+						answer.output_answer(temp, nodes_created, _fileParams.print_runtime, elapsedTimeInSecond, true);
 						line.clear();
 						i = possible_moves;
 					}
@@ -218,6 +222,9 @@ public class BFS {
 //			}
 
 
+		}
+		if (!found_answer) {
+			answer.output_answer(null, nodes_created, _fileParams.print_runtime, answer.getTimeInSeconds(start_time, System.nanoTime()), false);
 		}
 
 	}

@@ -7,6 +7,7 @@ public class Astar {
 
 	static void runAstar(fileParams _fileParams, Node source, Node goal) {
 		long start_time = System.nanoTime();
+		boolean found_answer = false;
 		
 		source.myManhattanDistance = heuristic.generateManhattanDistance(source, goal);
 		goal.myManhattanDistance = 0;
@@ -52,9 +53,9 @@ public class Astar {
 			Node popped_node = open_list_pq.poll();
 			open_list.remove(popped_node);
 			
-			if(closed_list.containsKey(popped_node)) {
-				System.err.println("Should never get here. Astar. A node that has already been checked, is being checked again.");
-			}
+//			if(closed_list.containsKey(popped_node)) {
+//				System.err.println("Should never get here. Astar. A node that has already been checked, is being checked again.");
+//			}
 			closed_list.put(popped_node, popped_node.getCost_to_me());
 
 			//reaching the goal for the first time is supposed to be the cheapest way to get to it,
@@ -62,9 +63,11 @@ public class Astar {
 			//so the first time the goal is found, it is the cheapest
 			if(popped_node.equals(goal)) {
 
+				found_answer = true;
+				
 				double elapsedTimeInSecond = answer.getTimeInSeconds(start_time, System.nanoTime());
-
-				answer.output_answer(popped_node, nodes_created, _fileParams.print_runtime, elapsedTimeInSecond);
+				
+				answer.output_answer(popped_node, nodes_created, _fileParams.print_runtime, elapsedTimeInSecond, true);
 				open_list.clear();
 				open_list_pq.clear();
 			}
@@ -237,35 +240,37 @@ public class Astar {
 					
 					
 					if(route.contentEquals("5D-3R-3U-2&5U-") || route.contentEquals("5D-3R-3U-5&2U-")) {
-						System.out.println("4 firsts");
+						System.out.println("4 firsts. Nodes created = " + nodes_created);
 					}
 					else if(route.contentEquals("5D-3R-3U-2&5U-7L-") || route.contentEquals("5D-3R-3U-5&2U-7L-") ) {
-						System.out.println("5 firsts");
+						System.out.println("5 firsts. Nodes created = " + nodes_created);
 					}
 					else if(route.contentEquals("5D-3R-3U-2&5U-7L-7L-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-") ) {
-						System.out.println("6 firsts");
+						System.out.println("6 firsts. Nodes created = " + nodes_created);
 					}
 					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-") ) {
-						System.out.println("7 firsts");
+						System.out.println("7 firsts. Nodes created = " + nodes_created);
+						System.out.println("open_list.size() = " + open_list.size());
 					}
 					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-") ) {
-						System.out.println("8 firsts");
-						print_route = true;
+						System.out.println("8 firsts. Nodes created = " + nodes_created);
+						System.out.println("open_list.size() = " + open_list.size());
+//						print_route = true;
 					}
-					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-3R-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-3R-") ) {
-						System.out.println("9 firsts");
+					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-") ) {
+						System.out.println("9 firsts. Nodes created = " + nodes_created);
 					}
-					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-3R-2U-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-3R-2U-") ) {
-						System.out.println("10 firsts");
+					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-3R-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-3R-") ) {
+						System.out.println("10 firsts. Nodes created = " + nodes_created);
 					}
-					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-3R-2U-4L-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-3R-2U-4L-") ) {
-						System.out.println("11 firsts");
+					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-3R-2U-4L-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-3R-2U-4L-") ) {
+						System.out.println("11 firsts. Nodes created = " + nodes_created);
 					}
-					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-3R-2U-4L-4L-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-3R-2U-4L-4L-") ) {
-						System.out.println("12 firsts");
+					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-3R-2U-4L-4L-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-3R-2U-4L-4L-") ) {
+						System.out.println("12 firsts. Nodes created = " + nodes_created);
 					}
-					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-3R-2U-4L-4L-5&6U-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-3R-2U-4L-4L-5&6U-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-3R-2U-4L-4L-6&5U-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-3R-2U-4L-4L-6&5U-") ) {
-						System.out.println("13 firsts - ALL!");
+					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-3R-2U-4L-4L-5&6U-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-3R-2U-4L-4L-5&6U-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-3R-2U-4L-4L-6&5U-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-3R-2U-4L-4L-6&5U-") ) {
+						System.out.println("13 firsts - ALL!. Nodes created = " + nodes_created);
 					}
 					
 					
@@ -305,6 +310,10 @@ public class Astar {
 
 
 
+		}
+		//getting here with found_answer = false, means no answer was found and I need to print that to the output file
+		if(!found_answer) {
+			answer.output_answer(null, nodes_created, _fileParams.print_runtime, answer.getTimeInSeconds(start_time, System.nanoTime()), false);
 		}
 
 	}
