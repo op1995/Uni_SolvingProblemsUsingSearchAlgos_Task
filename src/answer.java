@@ -72,7 +72,7 @@ public class answer {
 			
 			//else = failed
 			else {
-				myWriter.write("no path");
+				myWriter.write("no path\n");
 				myWriter.write("Num: " + nodes_created + "\n");
 				if(print_runtime) myWriter.write(elapsedTimeInSecond + " seconds");
 			}

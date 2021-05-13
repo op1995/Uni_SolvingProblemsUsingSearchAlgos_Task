@@ -9,6 +9,7 @@ public class Node implements Comparable<Node> {
 	
 	boolean two_blanks_exist = false;
 	
+	String name = "";
 	int[][] board;
 	
 	int numbers_moved_to_get_to_me[] = new int[1];
@@ -50,8 +51,10 @@ public class Node implements Comparable<Node> {
 	
 	//copy constructor
 	Node (Node copyMe){
-//		this.board = copyMe.board.clone();
 		this.board = new int[copyMe.board.length][copyMe.board[0].length];
+
+		
+//		this.board = copyMe.board.clone();
 		for (int i = 0; i < copyMe.board.length; i++) {
 			for (int j = 0; j < copyMe.board[0].length; j++) {
 				this.board[i][j] = copyMe.board[i][j];
@@ -487,7 +490,8 @@ public class Node implements Comparable<Node> {
 	
 	@Override
 	public int hashCode() {
-	    return board.hashCode();
+		return Arrays.hashCode(this.board);
+//	    return board.hashCode();
 	}
 	
 	@Override
@@ -527,8 +531,17 @@ public class Node implements Comparable<Node> {
 		return cost_to_me;
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	@Override
 	public String toString() {
+//		return Integer.toString(this.hashCode());
 		String return_value = "";
 		for (int i = 0; i < board.length; i++) {
 			return_value = return_value + Arrays.toString(board[i]) + "\n";	

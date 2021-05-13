@@ -21,7 +21,7 @@ public class Ex1 {
 				break;
 				
 			case "DFID":
-				
+				DFID.runDFID(_fileParams, source, goal);
 				break;
 			
 			

@@ -314,7 +314,7 @@ public class Astar {
 		}
 		//getting here with found_answer = false, means no answer was found and I need to print that to the output file
 		if(!found_answer) {
-			answer.output_answer(null, nodes_created, _fileParams.print_runtime, answer.getTimeInSeconds(start_time, System.nanoTime()), false);
+			answer.output_answer(null, nodes_created, _fileParams.print_runtime, answer.getTimeInSeconds(start_time, System.currentTimeMillis()), false);
 		}
 
 	}
