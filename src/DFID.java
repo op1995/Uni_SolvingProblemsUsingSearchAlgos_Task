@@ -25,6 +25,7 @@ public class DFID {
 			
 			else if(result.getName().contentEquals("found answer")) {
 				answer.output_answer(result, nodes_created, myFileParams.print_runtime, answer.getTimeInSeconds(start_time, System.currentTimeMillis()), true);
+				depth = -2;
 			}
 			
 			//else if(result is "cutoff") --> continue. No need for this code, it will happen on it's own.
@@ -186,7 +187,7 @@ public class DFID {
 					if(_result.getName().contentEquals("cutoff")) {
 						isCutOff = true;
 					}
-					else if(_result.getName().contentEquals("found_answer")) { //this is supposed to be _resulst != fail, but I think this will do the same
+					else if(_result.getName().contentEquals("found answer")) { //this is supposed to be _resulst != fail, but I think this will do the same
 						return _result;
 					}
 				}

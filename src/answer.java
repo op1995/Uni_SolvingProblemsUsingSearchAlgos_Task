@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 public class answer {
 
 	public static void output_answer(Node last, int nodes_created, boolean print_runtime, double elapsedTimeInSecond, boolean found_answer) {
-		File _file = new File("output.txt");
+		File _file = new File("output_IDAstar_input2.txt");
 		try {
 			Files.deleteIfExists(_file.toPath());
 		} catch (IOException e) {
@@ -26,7 +26,7 @@ public class answer {
 		}
 
 		try {
-			FileWriter myWriter = new FileWriter("output.txt");
+			FileWriter myWriter = new FileWriter("output_IDAstar_input2.txt");
 
 			if(found_answer) {
 				String route = "";			

@@ -30,9 +30,9 @@ public class Astar {
 		int nodes_created = 1; //starting from 1 because already created start node
 		Node temp = null;
 
-		String route = "";
-		String new_addition_to_route = "";
-		boolean print_route = false;
+//		String route = "";
+//		String new_addition_to_route = "";
+//		boolean print_route = false;
 		
 		
 		int possible_moves = source.two_blanks_exist? 12 : 4;
@@ -217,65 +217,65 @@ public class Astar {
 //					System.out.println("Num (nodes created): " + nodes_created);
 //					System.out.println("move " + mde);
 					
-					String before = temp.toString();
+//					String before = temp.toString();
 					
 					temp.move(mde, which_blank_to_check_or_move, how_many_to_check_or_move);
 					
 //					System.out.println("before - \n" + before);
 //					System.out.println("after - \n" + temp.toString());
 					
-					Node temp2 = new Node(temp);
-					route = "";
-					while(temp2.pred!=null) {
-						if(temp2.moved_2_to_get_to_me) {
-							new_addition_to_route = temp2.numbers_moved_to_get_to_me[0] + "&" + temp2.numbers_moved_to_get_to_me[1] + answer.moveIntToOutputForamt(temp2.move_made_to_get_to_me);
-						}
-						else {
-							new_addition_to_route = temp2.numbers_moved_to_get_to_me[0] + answer.moveIntToOutputForamt(temp2.move_made_to_get_to_me);
-						}
-
-						route = new_addition_to_route + "-" + route;
-						
-						temp2 = temp2.pred;
-					}
+//					Node temp2 = new Node(temp);
+//					route = "";
+//					while(temp2.pred!=null) {
+//						if(temp2.moved_2_to_get_to_me) {
+//							new_addition_to_route = temp2.numbers_moved_to_get_to_me[0] + "&" + temp2.numbers_moved_to_get_to_me[1] + answer.moveIntToOutputForamt(temp2.move_made_to_get_to_me);
+//						}
+//						else {
+//							new_addition_to_route = temp2.numbers_moved_to_get_to_me[0] + answer.moveIntToOutputForamt(temp2.move_made_to_get_to_me);
+//						}
+//
+//						route = new_addition_to_route + "-" + route;
+//						
+//						temp2 = temp2.pred;
+//					}
 					
 					
-					if(route.contentEquals("5D-3R-3U-2&5U-") || route.contentEquals("5D-3R-3U-5&2U-")) {
-						System.out.println("4 firsts. Nodes created = " + nodes_created);
-					}
-					else if(route.contentEquals("5D-3R-3U-2&5U-7L-") || route.contentEquals("5D-3R-3U-5&2U-7L-") ) {
-						System.out.println("5 firsts. Nodes created = " + nodes_created);
-					}
-					else if(route.contentEquals("5D-3R-3U-2&5U-7L-7L-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-") ) {
-						System.out.println("6 firsts. Nodes created = " + nodes_created);
-					}
-					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-") ) {
-						System.out.println("7 firsts. Nodes created = " + nodes_created);
-						System.out.println("open_list.size() = " + open_list.size());
-					}
-					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-") ) {
-						System.out.println("8 firsts. Nodes created = " + nodes_created);
-						System.out.println("open_list.size() = " + open_list.size());
-//						print_route = true;
-					}
-					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-") ) {
-						System.out.println("9 firsts. Nodes created = " + nodes_created);
-					}
-					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-3R-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-3R-") ) {
-						System.out.println("10 firsts. Nodes created = " + nodes_created);
-					}
-					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-3R-2U-4L-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-3R-2U-4L-") ) {
-						System.out.println("11 firsts. Nodes created = " + nodes_created);
-					}
-					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-3R-2U-4L-4L-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-3R-2U-4L-4L-") ) {
-						System.out.println("12 firsts. Nodes created = " + nodes_created);
-					}
-					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-3R-2U-4L-4L-5&6U-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-3R-2U-4L-4L-5&6U-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-3R-2U-4L-4L-6&5U-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-3R-2U-4L-4L-6&5U-") ) {
-						System.out.println("13 firsts - ALL!. Nodes created = " + nodes_created);
-					}
+//					if(route.contentEquals("5D-3R-3U-2&5U-") || route.contentEquals("5D-3R-3U-5&2U-")) {
+//						System.out.println("4 firsts. Nodes created = " + nodes_created);
+//					}
+//					else if(route.contentEquals("5D-3R-3U-2&5U-7L-") || route.contentEquals("5D-3R-3U-5&2U-7L-") ) {
+//						System.out.println("5 firsts. Nodes created = " + nodes_created);
+//					}
+//					else if(route.contentEquals("5D-3R-3U-2&5U-7L-7L-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-") ) {
+//						System.out.println("6 firsts. Nodes created = " + nodes_created);
+//					}
+//					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-") ) {
+//						System.out.println("7 firsts. Nodes created = " + nodes_created);
+//						System.out.println("open_list.size() = " + open_list.size());
+//					}
+//					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-") ) {
+//						System.out.println("8 firsts. Nodes created = " + nodes_created);
+//						System.out.println("open_list.size() = " + open_list.size());
+////						print_route = true;
+//					}
+//					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-") ) {
+//						System.out.println("9 firsts. Nodes created = " + nodes_created);
+//					}
+//					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-3R-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-3R-") ) {
+//						System.out.println("10 firsts. Nodes created = " + nodes_created);
+//					}
+//					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-3R-2U-4L-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-3R-2U-4L-") ) {
+//						System.out.println("11 firsts. Nodes created = " + nodes_created);
+//					}
+//					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-3R-2U-4L-4L-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-3R-2U-4L-4L-") ) {
+//						System.out.println("12 firsts. Nodes created = " + nodes_created);
+//					}
+//					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-3R-2U-4L-4L-5&6U-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-3R-2U-4L-4L-5&6U-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-3R-2U-4L-4L-6&5U-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-3R-2U-4L-4L-6&5U-") ) {
+//						System.out.println("13 firsts - ALL!. Nodes created = " + nodes_created);
+//					}
 					
 					
-					if(print_route) System.out.println(route);
+//					if(print_route) System.out.println(route);
 					
 					if(!closed_list.containsKey(temp)) {
 

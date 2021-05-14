@@ -13,14 +13,14 @@ public class BFS {
 		long start_time = System.currentTimeMillis();
 		boolean found_answer = false;
 		
-//		Node goal = new Node(_fileParams.board_goal, _fileParams.blank_counter, _fileParams.blank_location);
 		
-		Queue<Node> line = new LinkedList<Node>();
-		line.add(source);
-//		Hashtable<Node, Boolean> open_list = new Hashtable<Node, Boolean>();
-//		open_list.put(source, true);
+		//for the open list, I choose to use BOTH a queue-linkedList, AND a HashTable, to use the advantages of both		
+		Queue<Node> open_list_queue = new LinkedList<Node>();
+		open_list_queue.add(source);
+		Hashtable<Node, Boolean> open_list = new Hashtable<Node, Boolean>();
+		open_list.put(source, true);
+		
 		Hashtable<Node, Boolean> closed_list = new Hashtable<Node, Boolean>();
-//		closed_list.put(source, true);
 		
 		int nodes_created = 1; //starting from 1 because already created start node
 		Node temp = null;
@@ -29,13 +29,19 @@ public class BFS {
 		
 		int possible_moves = source.two_blanks_exist? 12 : 4;
 		
-		while(!line.isEmpty()) {
+		while(!open_list_queue.isEmpty()) {
 			if (_fileParams.openList) {
 				System.out.println("Open-list: \n");
-				line.stream().forEach(System.out::println);
+				open_list_queue.stream().forEach(System.out::println);
 			}
-			Node popped_node =line.remove();
+			//remove the first node on line in the open_list, both in the queue and the Hashtable
+			Node popped_node =open_list_queue.remove();
+			open_list.remove(popped_node);
+			
+			//put the popped_node in the closed list
 			closed_list.put(popped_node, true);
+			
+			//if there are two blanks, check which is higher or more to the left, so the predecessor order is as we were told to do in the task instructions.
 			int higher_or_more_to_the_left_node = 1;
 			int lower_or_more_to_the_right_node = 1;
 			if(popped_node.two_blanks_exist) {
@@ -137,13 +143,7 @@ public class BFS {
 					}
 				}
 				
-//				//test to see moving of 2 blanks
-//				if(popped_node.location_of_blank1 == 7 && popped_node.location_of_blank2 == 11) {
-//					System.out.println("Look at me, I'm Mr.Meeseeks");
-//				}
-				
 				//check if move is optional, and if not continue
-
 				if (!popped_node.check_move_allowed(mde, how_many_to_check_or_move, which_blank_to_check_or_move)) {
 //					System.out.println("continuing");
 					continue;
@@ -153,9 +153,12 @@ public class BFS {
 				temp = new Node(popped_node);
 				nodes_created++;
 				temp.pred = popped_node;
+				
 //				System.out.println("Direction: " + mde + " blank to move: " + which_blank_to_check_or_move + "\n");
 //				String before = temp.toString();
+				
 				temp.move(mde, which_blank_to_check_or_move, how_many_to_check_or_move);
+				
 //				System.out.println("before - \n" + before);
 //				System.out.println("after - \n" + temp.toString());
 				
@@ -170,7 +173,8 @@ public class BFS {
 //				}
 //				System.out.println(route);
 				
-				if(!(line.contains(temp) || closed_list.containsKey(temp))) {
+//				if(!(line.contains(temp) || closed_list.containsKey(temp))) {
+				if(!(open_list.containsKey(temp) || closed_list.containsKey(temp))) {
 //					closed_list.put(temp, true);
 					if(temp.equals(goal)) {
 						found_answer = true;
@@ -179,49 +183,17 @@ public class BFS {
 						double elapsedTimeInSecond = answer.getTimeInSeconds(start_time, end_time);
 						
 						answer.output_answer(temp, nodes_created, _fileParams.print_runtime, elapsedTimeInSecond, true);
-						line.clear();
+						open_list_queue.clear();
 						i = possible_moves;
 					}
 					else {
-						line.add(temp);
+						open_list_queue.add(temp);
+						open_list.put(temp, true);
 					}
 					
 				}
 
 			}
-
-
-			//			if(!popped_node.check_move_allowed(move_direction_enum.LEFT)) allowed.
-			//			
-			//			ArrayList<move_direction_enum> enums = new ArrayList<move_direction_enum>();
-			//			enums.add(move_direction_enum.LEFT);
-			//			enums.add(move_direction_enum.UP);
-			//			enums.add(move_direction_enum.RIGHT);
-			//			enums.add(move_direction_enum.DOWN);
-
-
-
-
-
-//			for (move_direction_enum mde : enums) {
-//
-//				if (!popped_node.check_move_allowed(mde)) continue; //if move not allowed, continue
-//				Node temp = new Node(popped_node);
-//				temp.move(mde);
-//				if(!(line.contains(temp) &&  ))
-//			}
-
-//			for (move_direction_enum de : move_direction_enum.values()) {
-//				move_direction_enum mde = de;
-//				if (!popped_node.check_move_allowed(de)) continue;
-//				Node temp = new Node(popped_node);
-//				temp.move(direction_enum);
-//				if(!(line.contains(temp) &&  ))
-//
-//
-//			}
-
-
 		}
 		if (!found_answer) {
 			answer.output_answer(null, nodes_created, _fileParams.print_runtime, answer.getTimeInSeconds(start_time, System.currentTimeMillis()), false);

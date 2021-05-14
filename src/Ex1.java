@@ -24,10 +24,8 @@ public class Ex1 {
 				DFID.runDFID(_fileParams, source, goal);
 				break;
 			
-			
-			
 			case "IDA*":
-
+				IDAstar.runIDAstar(_fileParams, source, goal);
 				break;
 			
 			case "DFBnB":

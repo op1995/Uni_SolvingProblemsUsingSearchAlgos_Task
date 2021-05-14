@@ -1,0 +1,3 @@
+no path
+Num: 7
+64.322 seconds

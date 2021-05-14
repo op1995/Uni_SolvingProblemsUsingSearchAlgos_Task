@@ -531,6 +531,14 @@ public class Node implements Comparable<Node> {
 		return cost_to_me;
 	}
 	
+	public int getMyManhattanDistance() {
+		return myManhattanDistance;
+	}
+	
+	public void updateMyManhattanDistance(Node goal) {
+		this.myManhattanDistance = heuristic.generateManhattanDistance(this, goal);
+	}
+	
 	public String getName() {
 		return name;
 	}
