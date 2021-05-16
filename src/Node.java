@@ -208,13 +208,15 @@ public class Node implements Comparable<Node> {
 		moved_2_to_get_to_me = true;
 		cost_to_me+=7;
 		
-		int row_of_blank1 = location_of_blank1 / this.board[0].length;
-		int column_of_blank1 = location_of_blank1 % this.board[0].length;
+		int higher_or_lefter_blank_row = location_of_blank1<location_of_blank2? location_of_blank1 / this.board[0].length : location_of_blank2 / this.board[0].length ;
+		int higher_or_lefter_blank_column = location_of_blank1<location_of_blank2? location_of_blank1 % this.board[0].length : location_of_blank2 % this.board[0].length;
 		
-		int row_of_blank2 = location_of_blank2 / this.board[0].length;
-		int column_of_blank2 = location_of_blank2 % this.board[0].length;
+		int lower_or_righter_blank_row = location_of_blank1<location_of_blank2? location_of_blank2 / this.board[0].length : location_of_blank1 / this.board[0].length;
+		int lower_or_righter_blank_column = location_of_blank1<location_of_blank2? location_of_blank2 % this.board[0].length : location_of_blank1 % this.board[0].length;
 		
 		this.numbers_moved_to_get_to_me = new int[2];
+		
+		
 
 		
 		switch(direction) {
@@ -222,16 +224,16 @@ public class Node implements Comparable<Node> {
 			//move left - need to move the numbers to the right of the empty slots
 			
 			//first set the values of the node, regarding what made the node as it is
-			this.numbers_moved_to_get_to_me[0] = this.board[row_of_blank1][column_of_blank1+1];
-			this.numbers_moved_to_get_to_me[1] = this.board[row_of_blank2][column_of_blank2+1];
+			this.numbers_moved_to_get_to_me[0] = this.board[higher_or_lefter_blank_row][higher_or_lefter_blank_column+1];
+			this.numbers_moved_to_get_to_me[1] = this.board[lower_or_righter_blank_row][lower_or_righter_blank_column+1];
 			this.move_made_to_get_to_me = 0;
 			
 			//copy the numbers to the right of the blanks to where the blanks are currently
-			this.board[row_of_blank1][column_of_blank1] = this.board[row_of_blank1][column_of_blank1+1]; 
-			this.board[row_of_blank2][column_of_blank2] = this.board[row_of_blank2][column_of_blank2+1]; 
+			this.board[higher_or_lefter_blank_row][higher_or_lefter_blank_column] = this.board[higher_or_lefter_blank_row][higher_or_lefter_blank_column+1]; 
+			this.board[lower_or_righter_blank_row][lower_or_righter_blank_column] = this.board[lower_or_righter_blank_row][lower_or_righter_blank_column+1]; 
 			//put blanks in the new spots
-			this.board[row_of_blank1][column_of_blank1+1] = -1;
-			this.board[row_of_blank2][column_of_blank2+1] = -1;
+			this.board[higher_or_lefter_blank_row][higher_or_lefter_blank_column+1] = -1;
+			this.board[lower_or_righter_blank_row][lower_or_righter_blank_column+1] = -1;
 			//mark the new locations of the blanks
 			
 			this.location_of_blank1 +=1;
@@ -244,16 +246,16 @@ public class Node implements Comparable<Node> {
 			//move up - need to move the numbers below the empty slots
 			
 			//first set the values of the node, regarding what made the node as it is
-			this.numbers_moved_to_get_to_me[0] = this.board[row_of_blank1+1][column_of_blank1];
-			this.numbers_moved_to_get_to_me[1] = this.board[row_of_blank2+1][column_of_blank2];
+			this.numbers_moved_to_get_to_me[0] = this.board[higher_or_lefter_blank_row+1][higher_or_lefter_blank_column];
+			this.numbers_moved_to_get_to_me[1] = this.board[lower_or_righter_blank_row+1][lower_or_righter_blank_column];
 			this.move_made_to_get_to_me = 1;
 			
 			//copy the numbers to the right of the blanks to where the blanks are currently
-			this.board[row_of_blank1][column_of_blank1] = this.board[row_of_blank1+1][column_of_blank1];
-			this.board[row_of_blank2][column_of_blank2] = this.board[row_of_blank2+1][column_of_blank2];
+			this.board[higher_or_lefter_blank_row][higher_or_lefter_blank_column] = this.board[higher_or_lefter_blank_row+1][higher_or_lefter_blank_column];
+			this.board[lower_or_righter_blank_row][lower_or_righter_blank_column] = this.board[lower_or_righter_blank_row+1][lower_or_righter_blank_column];
 			//put blanks in the new spots
-			this.board[row_of_blank1+1][column_of_blank1] = -1;
-			this.board[row_of_blank2+1][column_of_blank2] = -1;
+			this.board[higher_or_lefter_blank_row+1][higher_or_lefter_blank_column] = -1;
+			this.board[lower_or_righter_blank_row+1][lower_or_righter_blank_column] = -1;
 			//mark the new locations of the blanks
 			
 			this.location_of_blank1 += this.board[0].length;
@@ -266,16 +268,16 @@ public class Node implements Comparable<Node> {
 			//move right - need to move the numbers to the left of the empty slots
 			
 			//first set the values of the node, regarding what made the node as it is
-			this.numbers_moved_to_get_to_me[0] = this.board[row_of_blank1][column_of_blank1-1];
-			this.numbers_moved_to_get_to_me[1] = this.board[row_of_blank2][column_of_blank2-1];
+			this.numbers_moved_to_get_to_me[0] = this.board[higher_or_lefter_blank_row][higher_or_lefter_blank_column-1];
+			this.numbers_moved_to_get_to_me[1] = this.board[lower_or_righter_blank_row][lower_or_righter_blank_column-1];
 			this.move_made_to_get_to_me = 2;
 			
 			//copy the numbers to the right of the blanks to where the blanks are currently
-			this.board[row_of_blank1][column_of_blank1] = this.board[row_of_blank1][column_of_blank1-1]; 
-			this.board[row_of_blank2][column_of_blank2] = this.board[row_of_blank2][column_of_blank2-1]; 
+			this.board[higher_or_lefter_blank_row][higher_or_lefter_blank_column] = this.board[higher_or_lefter_blank_row][higher_or_lefter_blank_column-1]; 
+			this.board[lower_or_righter_blank_row][lower_or_righter_blank_column] = this.board[lower_or_righter_blank_row][lower_or_righter_blank_column-1]; 
 			//put blanks in the new spots
-			this.board[row_of_blank1][column_of_blank1-1] = -1;
-			this.board[row_of_blank2][column_of_blank2-1] = -1;
+			this.board[higher_or_lefter_blank_row][higher_or_lefter_blank_column-1] = -1;
+			this.board[lower_or_righter_blank_row][lower_or_righter_blank_column-1] = -1;
 			//mark the new locations of the blanks
 			
 			this.location_of_blank1 += -1;
@@ -287,16 +289,16 @@ public class Node implements Comparable<Node> {
 			//move up - need to move the numbers below the empty slots
 			
 			//first set the values of the node, regarding what made the node as it is
-			this.numbers_moved_to_get_to_me[0] = this.board[row_of_blank1-1][column_of_blank1];
-			this.numbers_moved_to_get_to_me[1] = this.board[row_of_blank2-1][column_of_blank2];
+			this.numbers_moved_to_get_to_me[0] = this.board[higher_or_lefter_blank_row-1][higher_or_lefter_blank_column];
+			this.numbers_moved_to_get_to_me[1] = this.board[lower_or_righter_blank_row-1][lower_or_righter_blank_column];
 			this.move_made_to_get_to_me = 4;
 			
 			//copy the numbers to the right of the blanks to where the blanks are currently
-			this.board[row_of_blank1][column_of_blank1] = this.board[row_of_blank1-1][column_of_blank1];
-			this.board[row_of_blank2][column_of_blank2] = this.board[row_of_blank2-1][column_of_blank2];
+			this.board[higher_or_lefter_blank_row][higher_or_lefter_blank_column] = this.board[higher_or_lefter_blank_row-1][higher_or_lefter_blank_column];
+			this.board[lower_or_righter_blank_row][lower_or_righter_blank_column] = this.board[lower_or_righter_blank_row-1][lower_or_righter_blank_column];
 			//put blanks in the new spots
-			this.board[row_of_blank1-1][column_of_blank1] = -1;
-			this.board[row_of_blank2-1][column_of_blank2] = -1;
+			this.board[higher_or_lefter_blank_row-1][higher_or_lefter_blank_column] = -1;
+			this.board[lower_or_righter_blank_row-1][lower_or_righter_blank_column] = -1;
 			//mark the new locations of the blanks
 			
 			this.location_of_blank1 += -this.board[0].length;

@@ -16,7 +16,9 @@ public class IDAstar {
 
 		while(threshold != Double.POSITIVE_INFINITY) {
 			double minF = Double.POSITIVE_INFINITY;
-
+			
+			source.setName(""); //need to erase the name\marking of source as "out" every time we get here, which is when the stack is empty and we update the threshold
+			
 			_stack.push(source);
 			open_list.put(source.hashCode(), source);
 
