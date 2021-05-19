@@ -11,6 +11,8 @@ public class Ex1 {
 			Node source = new Node(_fileParams.board_initial, _fileParams.blank_counter, _fileParams.blank1_location, _fileParams.blank2_location);
 			Node goal = new Node(_fileParams.board_goal, _fileParams.blank_counter, _fileParams.blank1_location, _fileParams.blank2_location);
 			
+			source.updateMyManhattanDistance(goal);
+			
 			switch(_fileParams.Algo) {
 			case "BFS":
 				BFS.runBFS(_fileParams, source, goal);
@@ -29,7 +31,7 @@ public class Ex1 {
 				break;
 			
 			case "DFBnB":
-				
+				DFBnB.runDFBnB(_fileParams, source, goal);
 				break;
 			
 			default:

@@ -86,7 +86,7 @@ public class heuristic {
 		}
 		
 		if (current.two_blanks_exist) {
-			return (int) (manhattanDistance*3.5);
+			return (int) (manhattanDistance*3);
 		}
 		else {
 			return (int) (manhattanDistance*5);

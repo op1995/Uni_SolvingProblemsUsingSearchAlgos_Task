@@ -25,7 +25,8 @@ public class BFS {
 		int nodes_created = 1; //starting from 1 because already created start node
 		Node temp = null;
 		
-//		String route = "";
+		String route = "";
+		boolean p = false;
 		
 		int possible_moves = source.two_blanks_exist? 12 : 4;
 		
@@ -162,22 +163,55 @@ public class BFS {
 //				System.out.println("before - \n" + before);
 //				System.out.println("after - \n" + temp.toString());
 				
-//				Node temp2 = new Node(temp);
-//				route = "";
-//				while(temp2.pred!=null) {
-//					route = temp2.number_moved_to_get_to_me + answer.moveIntToOutputForamt(temp2.move_made_to_get_to_me) + "-" + route;				
-//					temp2 = temp2.pred;
-//				}
+				Node temp2 = new Node(temp);
+				route = "";
+				String new_addition_to_route = "";
+				while(temp2.pred!=null) {
+					
+					if(temp2.moved_2_to_get_to_me) {
+						new_addition_to_route = temp2.numbers_moved_to_get_to_me[0] + "&" + temp2.numbers_moved_to_get_to_me[1] + answer.moveIntToOutputForamt(temp2.move_made_to_get_to_me);
+					}
+					else {
+						new_addition_to_route = temp2.numbers_moved_to_get_to_me[0] + answer.moveIntToOutputForamt(temp2.move_made_to_get_to_me);
+					}
+
+					route = new_addition_to_route + "-" + route;
+					temp2 = temp2.pred;
+					
+				}
 //				if(route.contentEquals("8R-11D-7L-8U-")) {
 //					System.out.println("at answer!");
 //				}
-//				System.out.println(route);
+				if(route.startsWith("5D-3R-3U-2&5U-7L-7L-5&6D-2R-4D-3R-2U-4L-4L")) {
+					System.out.println(route);
+					p = true;
+				}
 				
-//				if(!(line.contains(temp) || closed_list.containsKey(temp))) {
+				if(p) {
+					System.out.println(route + "	nodes_created = " + nodes_created + "	closed_list.size() = " + closed_list.size());	
+				}
+				
 				if(!(open_list.containsKey(temp) || closed_list.containsKey(temp))) {
-//					closed_list.put(temp, true);
 					if(temp.equals(goal)) {
 						found_answer = true;
+						
+						
+						
+						
+						
+						
+						
+//						System.out.println("DONE! closed_list.size() = " + closed_list.size());
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
 						
 						long end_time = System.currentTimeMillis();
 						double elapsedTimeInSecond = answer.getTimeInSeconds(start_time, end_time);
@@ -191,6 +225,21 @@ public class BFS {
 						open_list.put(temp, true);
 					}
 					
+				}
+				else {
+					if(open_list.containsKey(temp) && closed_list.containsKey(temp)) {
+						System.out.println("open_list.containsKey(temp) && closed_list.containsKey(temp)");
+					}
+					
+					else if(open_list.containsKey(temp)) {
+						System.out.println("open_list.containsKey(temp)");
+					}
+					else if(closed_list.containsKey(temp)) {
+						System.out.println("closed_list.containsKey(temp)");
+					}
+					else {
+						System.out.println("not supposed to get here");
+					}
 				}
 
 			}
