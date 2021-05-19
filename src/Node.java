@@ -206,7 +206,7 @@ public class Node implements Comparable<Node> {
 	//move 2 numbers together
 	public void move2(move_direction_enum direction) {
 		moved_2_to_get_to_me = true;
-		cost_to_me+=7;
+		
 		
 		int higher_or_lefter_blank_row = location_of_blank1<location_of_blank2? location_of_blank1 / this.board[0].length : location_of_blank2 / this.board[0].length ;
 		int higher_or_lefter_blank_column = location_of_blank1<location_of_blank2? location_of_blank1 % this.board[0].length : location_of_blank2 % this.board[0].length;
@@ -221,6 +221,7 @@ public class Node implements Comparable<Node> {
 		
 		switch(direction) {
 		case LEFT:
+			cost_to_me+=7;
 			//move left - need to move the numbers to the right of the empty slots
 			
 			//first set the values of the node, regarding what made the node as it is
@@ -242,7 +243,7 @@ public class Node implements Comparable<Node> {
 			break;
 		
 		case UP:
-			
+			cost_to_me+=7;
 			//move up - need to move the numbers below the empty slots
 			
 			//first set the values of the node, regarding what made the node as it is
@@ -264,7 +265,7 @@ public class Node implements Comparable<Node> {
 			break;
 		
 		case RIGHT:
-			
+			cost_to_me+=5;
 			//move right - need to move the numbers to the left of the empty slots
 			
 			//first set the values of the node, regarding what made the node as it is
@@ -286,6 +287,7 @@ public class Node implements Comparable<Node> {
 			break;
 		
 		case DOWN:
+			cost_to_me+=5;
 			//move up - need to move the numbers below the empty slots
 			
 			//first set the values of the node, regarding what made the node as it is
