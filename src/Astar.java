@@ -196,20 +196,7 @@ public class Astar {
 
 
 
-					//OLD EXPLANATION, WRONG - delete after making sure everything works
-					//
-					//check if I got there for cheaper (meaning the value in closed_list is higher)
-					//if so
-					// 	- check if this is already in the open_list
-					//			- if it is
-					//				- if it is there with a higher price
-					//					- replace it
-					//					- remove it from closed_list
-					//			- if it isn't
-					//				- add it to open list
-					//				- remove it from closed_list
-
-					// -
+					
 					temp = new Node(popped_node);
 					nodes_created++;
 					temp.pred = popped_node;
@@ -238,43 +225,7 @@ public class Astar {
 //						
 //						temp2 = temp2.pred;
 //					}
-					
-					
-//					if(route.contentEquals("5D-3R-3U-2&5U-") || route.contentEquals("5D-3R-3U-5&2U-")) {
-//						System.out.println("4 firsts. Nodes created = " + nodes_created);
-//					}
-//					else if(route.contentEquals("5D-3R-3U-2&5U-7L-") || route.contentEquals("5D-3R-3U-5&2U-7L-") ) {
-//						System.out.println("5 firsts. Nodes created = " + nodes_created);
-//					}
-//					else if(route.contentEquals("5D-3R-3U-2&5U-7L-7L-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-") ) {
-//						System.out.println("6 firsts. Nodes created = " + nodes_created);
-//					}
-//					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-") ) {
-//						System.out.println("7 firsts. Nodes created = " + nodes_created);
-//						System.out.println("open_list.size() = " + open_list.size());
-//					}
-//					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-") ) {
-//						System.out.println("8 firsts. Nodes created = " + nodes_created);
-//						System.out.println("open_list.size() = " + open_list.size());
-////						print_route = true;
-//					}
-//					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-") ) {
-//						System.out.println("9 firsts. Nodes created = " + nodes_created);
-//					}
-//					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-3R-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-3R-") ) {
-//						System.out.println("10 firsts. Nodes created = " + nodes_created);
-//					}
-//					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-3R-2U-4L-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-3R-2U-4L-") ) {
-//						System.out.println("11 firsts. Nodes created = " + nodes_created);
-//					}
-//					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-3R-2U-4L-4L-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-3R-2U-4L-4L-") ) {
-//						System.out.println("12 firsts. Nodes created = " + nodes_created);
-//					}
-//					else if(route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-3R-2U-4L-4L-5&6U-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-3R-2U-4L-4L-5&6U-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-5&6D-2R-4D-3R-2U-4L-4L-6&5U-") || route.contentEquals("5D-3R-3U-5&2U-7L-7L-6&5D-2R-4D-3R-2U-4L-4L-6&5U-") ) {
-//						System.out.println("13 firsts - ALL!. Nodes created = " + nodes_created);
-//					}
-					
-					
+				
 //					if(print_route) System.out.println(route);
 					
 					if(!closed_list.containsKey(temp)) {

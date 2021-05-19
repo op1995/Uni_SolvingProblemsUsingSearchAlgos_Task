@@ -1,0 +1,4 @@
+4L-1U-6R-2U-6R-5D-3R-7D-7D-4L-1L-2U-3R-4D-1L-2L-3U-5&6U
+Num: 4116133
+Cost: 92
+2.565 seconds

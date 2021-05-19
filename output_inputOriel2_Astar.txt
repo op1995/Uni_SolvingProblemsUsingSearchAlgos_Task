@@ -1,0 +1,4 @@
+9&10D-3R-1U-3R-5D-6R-1U-5&9L-6D-2L-3U-7L-8U-10L
+Num: 90979
+Cost: 74
+48.518 seconds

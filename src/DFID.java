@@ -12,7 +12,7 @@ public class DFID {
 
 		Hashtable<Node, Integer> closed_list = new Hashtable<Node, Integer>();
 		
-		for (int depth = 1; depth > -1; depth++) { //the loop will go on forever unless we set i to -1 manually
+		for (int depth = 1; depth > -1; depth++) { //the loop will go on forever unless we set i to -2 manually
 
 			closed_list = new Hashtable<Node, Integer>();
 			Node result = Limited_DFS(source, goal, depth, closed_list);
@@ -29,11 +29,6 @@ public class DFID {
 			}
 			
 			//else if(result is "cutoff") --> continue. No need for this code, it will happen on it's own.
-
-			//there is no need for else-if here, as there are 3 possible outcomes - 
-			//1 - fail - taken care of
-			//2 - success - taken care of in Limited_DFS
-			//3 - cut-off - no need to write else-if for it, just continue to the next iteration of this for-loop.
 		}
 
 	}
@@ -192,7 +187,7 @@ public class DFID {
 					}
 				}
 				
-			}//end for possible_moves
+			}//end for loop possible_moves
 			
 			closed_list.remove(n);
 			if (isCutOff) {
