@@ -221,7 +221,7 @@ public class Node implements Comparable<Node> {
 		
 		switch(direction) {
 		case LEFT:
-			cost_to_me+=7;
+			cost_to_me+=6;
 			//move left - need to move the numbers to the right of the empty slots
 			
 			//first set the values of the node, regarding what made the node as it is
@@ -243,7 +243,7 @@ public class Node implements Comparable<Node> {
 			break;
 		
 		case UP:
-			cost_to_me+=6;
+			cost_to_me+=7;
 			//move up - need to move the numbers below the empty slots
 			
 			//first set the values of the node, regarding what made the node as it is
@@ -265,7 +265,7 @@ public class Node implements Comparable<Node> {
 			break;
 		
 		case RIGHT:
-			cost_to_me+=7;
+			cost_to_me+=6;
 			//move right - need to move the numbers to the left of the empty slots
 			
 			//first set the values of the node, regarding what made the node as it is
@@ -287,7 +287,7 @@ public class Node implements Comparable<Node> {
 			break;
 		
 		case DOWN:
-			cost_to_me+=6;
+			cost_to_me+=7;
 			//move up - need to move the numbers below the empty slots
 			
 			//first set the values of the node, regarding what made the node as it is

@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 public class answer {
 
 	public static void output_answer(Node last, int nodes_created, boolean print_runtime, double elapsedTimeInSecond, boolean found_answer) {
-		String fileName = "output.txt";
+		String fileName = "output_inputOriel1_Astar.txt";
 		File _file = new File(fileName);
 		try {
 			Files.deleteIfExists(_file.toPath());
