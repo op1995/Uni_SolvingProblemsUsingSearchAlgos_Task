@@ -21,6 +21,8 @@ public class Node implements Comparable<Node> {
 	private int cost_to_me = 0;
 	int myManhattanDistance = -1;
 	
+	long creation_time = 0;
+	
 	Node (int[][] board, int blankCounter, int blank1_location, int blank2_location){
 		this.board = board;
 		this.location_of_blank1 = blank1_location;
@@ -30,17 +32,8 @@ public class Node implements Comparable<Node> {
 			this.two_blanks_exist = true;
 		}
 		
+		this.creation_time = System.currentTimeMillis();
 		
-//		location_of_each_number = new int[board.length * board[0].length - blankCounter];
-		
-		
-//		for (int i = 0; i < board.length; i++) {
-//			for (int j = 0; j < board[0].length; j++) {
-//				if(board[i][j] == -1) location_of_blank = i*board.length + j;
-//				location_of_each_number[board[i][j]] = i*board.length + j;
-//			}
-//			
-//		}
 		
 	}
 	
@@ -54,7 +47,6 @@ public class Node implements Comparable<Node> {
 		this.board = new int[copyMe.board.length][copyMe.board[0].length];
 
 		
-//		this.board = copyMe.board.clone();
 		for (int i = 0; i < copyMe.board.length; i++) {
 			for (int j = 0; j < copyMe.board[0].length; j++) {
 				this.board[i][j] = copyMe.board[i][j];
@@ -81,6 +73,8 @@ public class Node implements Comparable<Node> {
 		this.cost_to_me = copyMe.getCost_to_me();
 		this.myManhattanDistance = copyMe.myManhattanDistance;
 		this.moved_2_to_get_to_me = copyMe.moved_2_to_get_to_me;
+		
+		this.creation_time = System.currentTimeMillis();
 	}
 	
 	
@@ -565,8 +559,19 @@ public class Node implements Comparable<Node> {
 	public int compareTo(Node other) {
 		
 		if (this.cost_to_me + this.myManhattanDistance > other.cost_to_me + other.myManhattanDistance) return 1;
+		
 		else if(this.cost_to_me + this.myManhattanDistance < other.cost_to_me + other.myManhattanDistance) return -1;
-		else return 0;
+		
+		//getting here means cost_to_me + heuristic are equal for both, so we compare creating time
+		//where node created later in time are considered bigger
+		else {
+			if(this.creation_time > other.creation_time) return 1;
+			
+			else if(this.creation_time < other.creation_time) return -1;
+			
+			else return 0;
+		}
+		
 	}
 	
 }
