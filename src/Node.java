@@ -32,7 +32,8 @@ public class Node implements Comparable<Node> {
 			this.two_blanks_exist = true;
 		}
 		
-		this.creation_time = System.currentTimeMillis();
+//		this.creation_time = System.currentTimeMillis();
+		this.creation_time = System.nanoTime();
 		
 		
 	}
@@ -74,7 +75,8 @@ public class Node implements Comparable<Node> {
 		this.myManhattanDistance = copyMe.myManhattanDistance;
 		this.moved_2_to_get_to_me = copyMe.moved_2_to_get_to_me;
 		
-		this.creation_time = System.currentTimeMillis();
+//		this.creation_time = System.currentTimeMillis();
+		this.creation_time = System.nanoTime();
 	}
 	
 	

@@ -1,0 +1,4 @@
+9&10D-3R-3R-5D-6R-1U-1U-5&9L-10L-6D-2L-3U-7L-8U
+Num: 318200
+Cost: 73
+0.438 seconds
